@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useTransition, animated, useSpring } from 'react-spring'
+import { useTransition, animated, config } from 'react-spring'
 
 
 import MainMenu from './MainMenu'
@@ -10,13 +10,13 @@ const Navigation = () => {
 
     const [show, setShow] = useState(false);
 
-    // const t = useTransition(show, null, {
-    //     from: {opacity:0},
-    //     enter: {opacity:1},
-    //     leave: {opacity:0}
-    // })
-
-    const props = useSpring({opacity: show ? 1 : 0})
+    const t = useTransition(show, {
+        from: {opacity:0, top:"50px"},
+        enter: {opacity:1, top:"80px"},
+        leave: {opacity:0, top:"50px"},
+        config: {mass:5, tension:500, friction:100}
+        
+    })
 
     const theme = {
         gradientBg:{
@@ -91,11 +91,10 @@ const Navigation = () => {
                  <span></span>
                  <span></span>
              </MenuBurger>
-
-            {/* {
-                t.map(({item, key, props}) => 
+            {
+                t((style, item) => 
                     item &&
-                        <MenuWrap key={key} style={props} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
+                        <MenuWrap style={style} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
                             <div>
                                 <ul>
                                     <MainMenu theme={theme} />
@@ -104,15 +103,15 @@ const Navigation = () => {
                             <LoginSignUp theme={theme} />
                         </MenuWrap>
                     )
-            } */}
-             <MenuWrap style={props} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
+            }
+             {/* <MenuWrap style={props} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
                  <div>
                      <ul>
                          <MainMenu theme={theme} />
                      </ul>
                  </div>
                  <LoginSignUp theme={theme} />
-             </MenuWrap>
+             </MenuWrap> */}
         </div>
     )
 }
