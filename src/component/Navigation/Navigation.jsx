@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useTransition, animated, useSpring } from 'react-spring'
 
-import chevronDown from '../../images/icon-arrow-dark.svg'
 
-export const LoginSignUp = () => {
-    return (
-        <div>
-            <button>test</button>
-            <button></button>
-        </div>
-    )
-}
+import MainMenu from './MainMenu'
+import LoginSignUp from './LoginSignUp'
 
 const Navigation = () => {
+
+    const [show, setShow] = useState(false);
+
+    // const t = useTransition(show, null, {
+    //     from: {opacity:0},
+    //     enter: {opacity:1},
+    //     leave: {opacity:0}
+    // })
+
+    const props = useSpring({opacity: show ? 1 : 0})
+
     const theme = {
         gradientBg:{
             veryLightRed:"hsl(13, 100%, 72%)",
@@ -25,7 +30,8 @@ const Navigation = () => {
             veryDarkBlue:"hsl(237, 17%, 21%)",
             veryDarkDesaturatedBlue: "hsl(237, 20%, 50%)",
             grayishBlue:"hsl(240, 2%, 79%)",
-            bgColor:"hsl(0, 0%, 100%)"
+            bgColor:"hsl(0, 0%, 100%)",
+            white:"hsl(0, 0%, 100%)"
         },
         overpass:{
             family:"'Overpass', sans-serif",
@@ -36,30 +42,6 @@ const Navigation = () => {
             weight:[400, 500, 700]
         }
     }
-
-    const menuData = [
-        {
-            main:"Product", sub:[
-                {linkName:"Sub Nav 1"},
-                {linkName:"Sub Nav 2"}
-            ]
-        },
-        {
-            main:"Company", sub:[
-                {linkName:"Sub Nav 1"},
-                {linkName:"Sub Nav 2"},
-                {linkName:"Sub Nav 3"},
-                {linkName:"Sub Nav 4"}
-            ]
-        },
-        {
-            main:"Connect", sub:[
-                {linkName:"Contact"},
-                {linkName:"Newsletter"},
-                {linkName:"LinkedIn"}
-            ]
-        }
-    ]
 
     const MenuBurger = styled.div`
         position:relative;
@@ -91,95 +73,45 @@ const Navigation = () => {
         }
     `
 
-    const MenuWrap = styled.div`
+    const MenuWrap = styled(animated.div)`
         position:absolute;
         top:80px;
         left:0;
         width:100%;
         padding:30px 20px;
         border-radius:5px;
-        background:${({bgColor}) => bgColor};
-        box-shadow:${({boxShadow}) => boxShadow};
-    `
-
-    const LinkLi = styled.li`
-        margin-bottom:20px;
-        text-align:center;
-
-        &:last-child{margin-bottom:0;}
-    `
-
-    const LinkButton = styled.button`
-        margin-bottom:20px;
-        background:transparent;
-        cursor:pointer;
-
-        &:last-child{margin-bottom:0;}
-
-        span{
-            font-size:1.2rem;
-            font-family:${({overpass}) => overpass.family};
-            font-weight:${({overpass}) => overpass.weight[1]};
-            margin-right:7px;
-            color:${({color}) => color.veryDarkBlue};
-        }
-
-        img{margin-bottom:3px;}
-    `
-
-    const SubMenu = styled.ul`
-        padding:20px;
-        background:#f1f1f1;
-        border-radius:5px;
-    `
-
-    const SubLinkButton = styled.button`
-        font-size:1rem;
-        font-family:${({overpass}) => overpass.family};
-        font-weight:${({overpass}) => overpass.weight[1]};
-        color:${({color}) => color.veryDarkDesaturatedBlue};
+        background:${({bgcolor}) => bgcolor};
+        box-shadow:${({boxshadow}) => boxshadow};
     `
 
     return (
         <div style={{justifySelf:"end"}}>
-             <MenuBurger bgColor={theme.colors.bgColor}>
+             <MenuBurger bgColor={theme.colors.bgColor} onClick={() => setShow(!show)}>
                  <span></span>
                  <span></span>
                  <span></span>
              </MenuBurger>
 
-             <MenuWrap bgColor={theme.colors.bgColor} boxShadow={theme.boxShadow}>
+            {/* {
+                t.map(({item, key, props}) => 
+                    item &&
+                        <MenuWrap key={key} style={props} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
+                            <div>
+                                <ul>
+                                    <MainMenu theme={theme} />
+                                </ul>
+                            </div>
+                            <LoginSignUp theme={theme} />
+                        </MenuWrap>
+                    )
+            } */}
+             <MenuWrap style={props} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
                  <div>
                      <ul>
-                         {
-                             menuData.map(({main, sub}) => {
-                                 return (
-                                    <LinkLi>
-                                        <LinkButton overpass={theme.overpass} color={theme.colors}>
-                                            <span>{main}</span>
-                                            <img src={chevronDown} alt="chevrondown"/>
-                                        </LinkButton>
-                                        <SubMenu>
-                                            {
-                                                sub.map(({linkName}) => {
-                                                    return (
-                                                        <LinkLi>
-                                                            <SubLinkButton overpass={theme.overpass} color={theme.colors}>
-                                                                {linkName}
-                                                            </SubLinkButton>
-                                                        </LinkLi>
-                                                    )
-                                                })
-                                            }
-                                        </SubMenu>
-                                    </LinkLi>   
-                                )
-                             })
-                         }
-                         
+                         <MainMenu theme={theme} />
                      </ul>
                  </div>
-                 <LoginSignUp />
+                 <LoginSignUp theme={theme} />
              </MenuWrap>
         </div>
     )

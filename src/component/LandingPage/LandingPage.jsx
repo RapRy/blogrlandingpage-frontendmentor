@@ -20,8 +20,28 @@ const LandingPage = () => {
     }
 
     const btnData = [
-        {text:"Start for Free", borderStyle:"none", bgStyle:theme.colors.white, colorStyle:theme.colors.lightRed, marginStyle:"10px", fontStyle:theme.ubuntu, width:"160px"},
-        {text:"Learn More", borderStyle:`1px solid ${theme.colors.white}`, bgStyle:"transparent", colorStyle:theme.colors.white, marginStyle:"0", fontStyle:theme.ubuntu, width:"160px"}
+        {
+            text:"Start for Free",
+            borderStyle:"none", 
+            bgStyle:theme.colors.white, 
+            colorStyle:theme.colors.lightRed, 
+            marginStyle:"0 10px 0 0", 
+            fontStyle:theme.ubuntu.family, 
+            width:"160px", 
+            display:"inline-block",
+            fontWeight:theme.ubuntu.weight[1]
+        },
+        {
+            text:"Learn More", 
+            borderStyle:`1px solid ${theme.colors.white}`, 
+            bgStyle:"transparent", 
+            colorStyle:theme.colors.white, 
+            marginStyle:"0", 
+            fontStyle:theme.ubuntu.family,  
+            width:"160px", 
+            display:"inline-block",
+            fontWeight:theme.ubuntu.weight[1]
+        }
     ]
 
     const Wrapper = styled.div`
@@ -52,7 +72,7 @@ const LandingPage = () => {
             <h1>A modern publishing platform</h1>
             <p>Grow your audience and build your online brand</p>
             <div>
-                {btnData.map((data) => <Button data={data} />)}
+                {btnData.map((data, i) => <Button key={i} data={data} />)}
             </div>
         </Wrapper>
     )
