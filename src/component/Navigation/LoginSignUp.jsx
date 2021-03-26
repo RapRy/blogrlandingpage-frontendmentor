@@ -3,6 +3,13 @@ import styled from 'styled-components'
 
 import { Button } from '../subcomp/'
 
+const Wrap = styled.div`
+    margin-top:30px;
+    border-top:1px solid #f1f1f1;
+    padding:20px 0 0;
+    text-align:center;
+`
+
 const LoginSignUp = ({theme}) => {
     const btnData = [
         {
@@ -28,13 +35,6 @@ const LoginSignUp = ({theme}) => {
             fontWeight:theme.ubuntu.weight[1]
         }
     ]
-
-    const Wrap = styled.div`
-        margin-top:30px;
-        border-top:1px solid #f1f1f1;
-        padding:20px 0 0;
-        text-align:center;
-    `
 
     return (
         <Wrap ubuntu={theme.ubuntu} color={theme.colors}>

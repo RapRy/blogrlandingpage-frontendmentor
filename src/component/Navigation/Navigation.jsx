@@ -1,10 +1,51 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useTransition, animated, config } from 'react-spring'
+import { useTransition, animated } from 'react-spring'
 
 
 import MainMenu from './MainMenu'
 import LoginSignUp from './LoginSignUp'
+
+const MenuBurger = styled.div`
+    position:relative;
+    width:45px;
+    height:23px;
+    cursor:pointer;
+
+    span{
+        width:100%;
+        height:3px;
+        position:absolute;
+        background:${({bgColor}) => bgColor};
+        display:block;
+
+        &:nth-child(1){
+            top:0;
+            right:0;
+        }
+
+        &:nth-child(2){
+            top:10px;
+            right:0;
+        }
+
+        &:nth-child(3){
+            top:20px;
+            right:0;
+        }
+    }
+`
+
+const MenuWrap = styled(animated.div)`
+    position:absolute;
+    top:80px;
+    left:0;
+    width:100%;
+    padding:30px 20px;
+    border-radius:5px;
+    background:${({bgcolor}) => bgcolor};
+    box-shadow:${({boxshadow}) => boxshadow};
+`
 
 const Navigation = () => {
 
@@ -17,6 +58,30 @@ const Navigation = () => {
         config: {mass:5, tension:500, friction:100}
         
     })
+
+    const menuData = [
+        {
+            main:"Product", sub:[
+                {linkName:"Sub Nav 1"},
+                {linkName:"Sub Nav 2"}
+            ]
+        },
+        {
+            main:"Company", sub:[
+                {linkName:"Sub Nav 1"},
+                {linkName:"Sub Nav 2"},
+                {linkName:"Sub Nav 3"},
+                {linkName:"Sub Nav 4"}
+            ]
+        },
+        {
+            main:"Connect", sub:[
+                {linkName:"Contact"},
+                {linkName:"Newsletter"},
+                {linkName:"LinkedIn"}
+            ]
+        }
+    ]
 
     const theme = {
         gradientBg:{
@@ -43,47 +108,6 @@ const Navigation = () => {
         }
     }
 
-    const MenuBurger = styled.div`
-        position:relative;
-        width:45px;
-        height:23px;
-        cursor:pointer;
-
-        span{
-            width:100%;
-            height:3px;
-            position:absolute;
-            background:${({bgColor}) => bgColor};
-            display:block;
-
-            &:nth-child(1){
-                top:0;
-                right:0;
-            }
-
-            &:nth-child(2){
-                top:10px;
-                right:0;
-            }
-
-            &:nth-child(3){
-                top:20px;
-                right:0;
-            }
-        }
-    `
-
-    const MenuWrap = styled(animated.div)`
-        position:absolute;
-        top:80px;
-        left:0;
-        width:100%;
-        padding:30px 20px;
-        border-radius:5px;
-        background:${({bgcolor}) => bgcolor};
-        box-shadow:${({boxshadow}) => boxshadow};
-    `
-
     return (
         <div style={{justifySelf:"end"}}>
              <MenuBurger bgColor={theme.colors.bgColor} onClick={() => setShow(!show)}>
@@ -97,7 +121,11 @@ const Navigation = () => {
                         <MenuWrap style={style} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
                             <div>
                                 <ul>
-                                    <MainMenu theme={theme} />
+                                    {
+                                        menuData.map(({main, sub}, i) => {
+                                            return <MainMenu theme={theme} main={main} sub={sub} key={i} />
+                                        })
+                                    }
                                 </ul>
                             </div>
                             <LoginSignUp theme={theme} />

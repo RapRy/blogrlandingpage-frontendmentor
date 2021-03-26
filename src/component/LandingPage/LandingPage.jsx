@@ -3,6 +3,29 @@ import styled from 'styled-components'
 
 import { Button } from '../subcomp'
 
+const Wrapper = styled.div`
+    margin:150px 0;
+    text-align:center;
+    position:relative;
+    z-index:2;
+
+    h1{
+        font-family:${({overpass}) => overpass.family};
+        font-weight:${({overpass}) => overpass.weight[1]};
+        font-size:2.6rem;
+        color:${({textColor}) => textColor.white};
+        margin-bottom:30px;
+    }
+
+    p{
+        font-family:${({overpass}) => overpass.family};
+        font-weight:${({overpass}) => overpass.weight[0]};
+        font-size:1.3rem;
+        color:${({textColor}) => textColor.white};
+        margin-bottom:50px;
+    }
+`
+
 const LandingPage = () => {
     const theme = {
         overpass:{
@@ -43,29 +66,6 @@ const LandingPage = () => {
             fontWeight:theme.ubuntu.weight[1]
         }
     ]
-
-    const Wrapper = styled.div`
-        margin:150px 0;
-        text-align:center;
-        position:relative;
-        z-index:2;
-
-        h1{
-            font-family:${({overpass}) => overpass.family};
-            font-weight:${({overpass}) => overpass.weight[1]};
-            font-size:2.6rem;
-            color:${({textColor}) => textColor.white};
-            margin-bottom:30px;
-        }
-
-        p{
-            font-family:${({overpass}) => overpass.family};
-            font-weight:${({overpass}) => overpass.weight[0]};
-            font-size:1.3rem;
-            color:${({textColor}) => textColor.white};
-            margin-bottom:50px;
-        }
-    `
 
     return (
         <Wrapper overpass={theme.overpass} textColor={theme.colors}>

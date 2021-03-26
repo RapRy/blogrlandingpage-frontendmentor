@@ -7,6 +7,41 @@ import logo from '../images/logo.svg'
 import Navigation from './Navigation/Navigation'
 import Landingpage from './LandingPage/LandingPage'
 
+
+const Wrapper = styled.section`
+    padding:20px 20px;
+    background:linear-gradient(to top, ${({gradient}) => gradient.lightRed }, ${({gradient}) => gradient.veryLightRed });
+    border-radius:0 0 0 80px;
+    position:relative;
+`
+
+const PatternBg = styled.section`
+    position:absolute;
+    top:0;
+    right:0;
+    overflow:hidden;
+    z-index:1;
+    width:100%;
+    height:100%;
+    border-radius:0 0 0 80px;
+
+    & > img{
+        max-width:200%;
+        position:relative;
+        bottom:0;
+        right:0;
+    }
+`
+
+const Container = styled.section`
+    position:relative;
+    z-index:3;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    grid-gap:20px;
+    align-items:center;
+`
+
 const Header = () => {
     const theme = {
         gradientBg:{
@@ -28,40 +63,6 @@ const Header = () => {
             weight:[400, 500, 700]
         }
     }
-
-    const Wrapper = styled.section`
-        padding:20px 20px;
-        background:linear-gradient(to top, ${({gradient}) => gradient.lightRed }, ${({gradient}) => gradient.veryLightRed });
-        border-radius:0 0 0 80px;
-        position:relative;
-    `
-
-    const PatternBg = styled.section`
-        position:absolute;
-        top:0;
-        right:0;
-        overflow:hidden;
-        z-index:1;
-        width:100%;
-        height:100%;
-        border-radius:0 0 0 80px;
-
-        & > img{
-          max-width:200%;
-          position:relative;
-          bottom:0;
-          right:0;
-        }
-    `
-
-    const Container = styled.section`
-        position:relative;
-        z-index:3;
-        display:grid;
-        grid-template-columns:auto 1fr;
-        grid-gap:20px;
-        align-items:center;
-    `
 
     return (
         <Wrapper gradient={theme.gradientBg}>
