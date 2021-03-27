@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useTransition, animated } from 'react-spring'
+import { useTransition, animated, useSprings } from 'react-spring'
 
 
 import MainMenu from './MainMenu'
@@ -49,6 +49,8 @@ const MenuWrap = styled(animated.div)`
 
 const Navigation = () => {
 
+    const items = ["", "", ""]
+
     const [show, setShow] = useState(false);
 
     const t = useTransition(show, {
@@ -58,6 +60,8 @@ const Navigation = () => {
         config: {mass:5, tension:500, friction:100}
         
     })
+
+    const springs = useSprings(3, items.map(item => ({opacity: 1})))
 
     const menuData = [
         {
@@ -111,9 +115,12 @@ const Navigation = () => {
     return (
         <div style={{justifySelf:"end"}}>
              <MenuBurger bgColor={theme.colors.bgColor} onClick={() => setShow(!show)}>
+                 {
+                     springs.map(props => <animated.span style={props} />)
+                 }
+                 {/* <span></span>
                  <span></span>
-                 <span></span>
-                 <span></span>
+                 <span></span> */}
              </MenuBurger>
             {
                 t((style, item) => 

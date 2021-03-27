@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
-import {useTransition, animated} from 'react-spring'
+import {useTransition, animated, to } from 'react-spring'
 
 import chevronDown from '../../images/icon-arrow-dark.svg'
 
@@ -45,21 +45,16 @@ const LinkLi = styled.li`
 `
 
 const MainMenu = ({theme, sub, main}) => {
+
     const [show, setShow] = useState(false)
 
     const trans = useTransition(show, {
-        from: {opacity:0, top:"50px"},
-        enter: {opacity:1, top:"80px"},
-        leave: {opacity:0, top:"50px"},
+        from: {x:0},
+        enter: {x:1},
+        leave: {x:0},
+        unique:true,
         config: {mass:5, tension:500, friction:100}
     })
-
-    const ref = useRef(null)
-
-    useEffect(() => {
-        if(ref.current != null)
-            console.log(ref.current.clientHeight);
-    }, [show])
 
     return (
             <LinkLi>
@@ -70,7 +65,16 @@ const MainMenu = ({theme, sub, main}) => {
                 {
                     trans((style, item) => 
                     item &&
-                    <Wrap style={style} ref={ref}>
+                    <Wrap style={{
+                        transform:to([style.x], v => `scaleY(${v})`),
+                        transformOrigin: "top",
+                        overflow: "hidden",
+                        position: "relative"
+                    }}>
+                        <animated.div style={{
+                                        transformOrigin:"top",
+                                        transform: to([style.x], v => `scaleY(${1 / v})`)
+                                    }}>
                         {
                             sub.map(({linkName}, i) => {
                                 return (
@@ -82,6 +86,7 @@ const MainMenu = ({theme, sub, main}) => {
                                 )
                             })
                         }
+                        </animated.div>
                     </Wrap>
                 )
                 }
