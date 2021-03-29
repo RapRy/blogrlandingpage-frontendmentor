@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import {useTransition, animated, to } from 'react-spring'
+import {useTransition, animated, to, useSpring } from 'react-spring'
 
 import chevronDown from '../../images/icon-arrow-dark.svg'
 
@@ -34,7 +34,10 @@ const LinkButton = styled.button`
         color:${({color}) => color.veryDarkBlue};
     }
 
-    img{margin-bottom:3px;}
+    img{
+        margin-bottom:3px;
+        transform-origin:center;
+    }
 `
 
 const LinkLi = styled.li`
@@ -56,11 +59,13 @@ const MainMenu = ({theme, sub, main}) => {
         config: {mass:5, tension:500, friction:100}
     })
 
+    const spring = useSpring({transform:show ? "rotate(180deg)" : "rotate(0deg)"})
+
     return (
             <LinkLi>
                 <LinkButton overpass={theme.overpass} color={theme.colors} onClick={() => setShow(!show)}>
                     <span>{main}</span>
-                    <img src={chevronDown} alt="chevrondown"/>
+                    <animated.img src={chevronDown} alt="chevrondown" style={spring}/>
                 </LinkButton>
                 {
                     trans((style, item) => 

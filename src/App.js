@@ -1,10 +1,13 @@
 import './App.css';
-import { Header } from './component'
+import { Header, Introduction, Infrastructure } from './component'
+
 
 function App() {
   return (
     <>
       <Header />
+      <Introduction />
+      <Infrastructure />
     </>
     
   );

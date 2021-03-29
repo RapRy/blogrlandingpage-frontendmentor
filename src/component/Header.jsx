@@ -26,10 +26,20 @@ const PatternBg = styled.section`
     border-radius:0 0 0 80px;
 
     & > img{
-        max-width:200%;
+        max-width:300%;
         position:relative;
-        bottom:0;
-        right:0;
+        bottom:20%;
+        right:30%;
+
+        @media all and (min-width:500px){
+            max-width:200%;
+        }
+
+        @media all and (min-width:700px){
+            max-width:150%;
+            bottom:50%;
+            right:10%;
+        }
     }
 `
 

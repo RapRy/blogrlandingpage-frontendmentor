@@ -18,6 +18,7 @@ const MenuBurger = styled.div`
         position:absolute;
         background:${({bgColor}) => bgColor};
         display:block;
+        transform-origin:center;
 
         &:nth-child(1){
             top:0;
@@ -49,11 +50,24 @@ const MenuWrap = styled(animated.div)`
 
 const Navigation = () => {
 
-    const items = ["", "", ""]
+    const spanElements = [
+        {
+            to:{top:"10px", rotation:"rotate(45deg)", opacity:1},
+            from:{top:"0px", rotation:"rotate(0deg)", opacity:1}
+        },
+        {
+            to:{top:"10px", rotation:"rotate(0deg)", opacity:0},
+            from:{top:"10px", rotation:"rotate(0deg)", opacity:1}
+        },
+        {
+            to:{top:"10px", rotation:"rotate(-45deg)", opacity:1},
+            from:{top:"20px", rotation:"rotate(0deg)", opacity:1}
+        }
+    ]
 
     const [show, setShow] = useState(false);
 
-    const t = useTransition(show, {
+    const transition = useTransition(show, {
         from: {opacity:0, top:"50px"},
         enter: {opacity:1, top:"80px"},
         leave: {opacity:0, top:"50px"},
@@ -61,7 +75,16 @@ const Navigation = () => {
         
     })
 
-    const springs = useSprings(3, items.map(item => ({opacity: 1})))
+    const springs = useSprings(spanElements.length, spanElements.map(span => {
+        return ({
+            to:{
+                opacity:show ? span.to.opacity : span.from.opacity, 
+                top:show ? span.to.top : span.from.top, 
+                transform:show ? span.to.rotation : span.from.rotation
+            },
+            config: {mass:5, tension:500, friction:100}
+        })
+    }))
 
     const menuData = [
         {
@@ -116,14 +139,14 @@ const Navigation = () => {
         <div style={{justifySelf:"end"}}>
              <MenuBurger bgColor={theme.colors.bgColor} onClick={() => setShow(!show)}>
                  {
-                     springs.map(props => <animated.span style={props} />)
+                     springs.map((props, i) => <animated.span key={i} style={props} />)
                  }
                  {/* <span></span>
                  <span></span>
                  <span></span> */}
              </MenuBurger>
             {
-                t((style, item) => 
+                transition((style, item) => 
                     item &&
                         <MenuWrap style={style} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
                             <div>
@@ -139,14 +162,6 @@ const Navigation = () => {
                         </MenuWrap>
                     )
             }
-             {/* <MenuWrap style={props} bgcolor={theme.colors.bgColor} boxshadow={theme.boxShadow}>
-                 <div>
-                     <ul>
-                         <MainMenu theme={theme} />
-                     </ul>
-                 </div>
-                 <LoginSignUp theme={theme} />
-             </MenuWrap> */}
         </div>
     )
 }
