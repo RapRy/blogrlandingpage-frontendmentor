@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import illustrationEditorMobile from '../../images/illustration-editor-mobile.svg'
 
-import Article from './Article'
+import { Article } from '../subcomp'
 
 
 const IntroWrapper = styled.div`

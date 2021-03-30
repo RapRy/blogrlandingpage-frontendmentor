@@ -1,5 +1,5 @@
 import './App.css';
-import { Header, Introduction, Infrastructure } from './component'
+import { Header, Introduction, Infrastructure, Powerful, Footer } from './component'
 
 
 function App() {
@@ -8,6 +8,8 @@ function App() {
       <Header />
       <Introduction />
       <Infrastructure />
+      <Powerful />
+      <Footer />
     </>
     
   );

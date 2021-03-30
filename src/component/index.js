@@ -1,3 +1,5 @@
 export {default as Header } from './Header'
 export {default as Introduction} from './Introduction/Introduction'
 export {default as Infrastructure} from './Infrastructure/Infrastructure'
+export {default as Powerful} from './Powerful/Powerful'
+export {default as Footer} from './Footer/Footer'

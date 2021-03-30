@@ -89,16 +89,19 @@ const Navigation = () => {
     const menuData = [
         {
             main:"Product", sub:[
-                {linkName:"Sub Nav 1"},
-                {linkName:"Sub Nav 2"}
+                {linkName:"Overview"},
+                {linkName:"Pricing"},
+                {linkName:"Marketplace"},
+                {linkName:"Features"},
+                {linkName:"Integrations"}
             ]
         },
         {
             main:"Company", sub:[
-                {linkName:"Sub Nav 1"},
-                {linkName:"Sub Nav 2"},
-                {linkName:"Sub Nav 3"},
-                {linkName:"Sub Nav 4"}
+                {linkName:"About"},
+                {linkName:"Team"},
+                {linkName:"Blog"},
+                {linkName:"Careers"}
             ]
         },
         {
