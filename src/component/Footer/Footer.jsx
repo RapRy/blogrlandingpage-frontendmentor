@@ -9,11 +9,36 @@ const FooterWrap = styled.div`
 `
 
 const FooterContainer = styled.div`
-
+    padding:60px 20px 10px;
+    text-align:center;
 `
 
 const FooterMenu = styled.div`
+    margin-top:50px;
+`
 
+const Main = styled.div`
+    font-family:${({font}) => font.family};
+    font-size:1.3rem;
+    font-weight:${({font}) => font.weight[1]};
+    color:${({color}) => color};
+    margin-bottom:30px;
+`
+
+const Sub = styled.ul`
+    margin-bottom:50px;
+
+    li{
+        font-family:${({font}) => font.family};
+        font-size:1.1rem;
+        font-weight:${({font}) => font.weight[0]};
+        color:${({color}) => color};
+        margin-bottom:20px;
+
+        &:last-child{
+            margin-bottom:0;
+        }
+    }
 `
 
 const Footer = () => {
@@ -80,7 +105,14 @@ const Footer = () => {
                             menuData.map(({main, sub}, iMain) => {
                                 return (
                                     <div key={iMain}>
-
+                                        <Main font={theme.ubuntu} color={theme.colors.white}>
+                                            <span>{main}</span>
+                                        </Main>
+                                        <Sub font={theme.ubuntu} color={theme.colors.grayishBlue}>
+                                            {
+                                                sub.map(({linkName}, iSub) => <li key={iSub}>{linkName}</li>)
+                                            }
+                                        </Sub>
                                     </div>
                                 )
                             })
