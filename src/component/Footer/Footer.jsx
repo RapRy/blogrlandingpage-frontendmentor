@@ -5,7 +5,7 @@ import logo from '../../images/logo.svg'
 
 const FooterWrap = styled.div`
     background:${({bg}) => bg};
-    border-radius:0 80px 0 80px;
+    border-radius:0 80px 0 0px;
 `
 
 const FooterContainer = styled.div`

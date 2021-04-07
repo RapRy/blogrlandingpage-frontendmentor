@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useTransition, animated, useSprings } from 'react-spring'
 
 
 import MainMenu from './MainMenu'
 import LoginSignUp from './LoginSignUp'
+
+const Wrapper = styled.div`
+    justify-self:end;
+
+    @media all and (min-width:850px){
+        justify-self:start;
+        width:100%;
+    }
+`
 
 const MenuBurger = styled.div`
     position:relative;
@@ -35,6 +44,10 @@ const MenuBurger = styled.div`
             right:0;
         }
     }
+
+    @media all and (min-width:820px){
+        display:none;
+    }
 `
 
 const MenuWrap = styled(animated.div)`
@@ -46,6 +59,18 @@ const MenuWrap = styled(animated.div)`
     border-radius:5px;
     background:${({bgcolor}) => bgcolor};
     box-shadow:${({boxshadow}) => boxshadow};
+
+    @media all and (min-width:850px){
+        display:grid;
+        grid-template-columns:1fr auto;
+        gap:20px;
+        position:relative;
+        top:0;
+        left:0;
+        background:transparent;
+        box-shadow:none;
+        align-items:center;
+    }
 `
 
 const Navigation = () => {
@@ -66,10 +91,11 @@ const Navigation = () => {
     ]
 
     const [show, setShow] = useState(false);
+    const [mediaQuer, setMediaQuer] = useState(0)
 
     const transition = useTransition(show, {
-        from: {opacity:0, top:"50px"},
-        enter: {opacity:1, top:"80px"},
+        from: {opacity:0, top:mediaQuer === 0 ? "50px" : "0px"},
+        enter: {opacity:1, top:mediaQuer === 0 ? "80px" : "0px"},
         leave: {opacity:0, top:"50px"},
         config: {mass:5, tension:500, friction:100}
         
@@ -138,8 +164,25 @@ const Navigation = () => {
         }
     }
 
+    useEffect(() => {
+        if(window.matchMedia('(min-width:820px)').matches){
+            setMediaQuer(850)
+            setShow(true)
+        }
+
+        window.addEventListener('resize', () => {
+            if(window.matchMedia('(min-width:820px)').matches){
+                setMediaQuer(850)
+                setShow(true)
+            }else{
+                setMediaQuer(0)
+                setShow(false)
+            }
+        })
+    }, [mediaQuer]) // eslint-disable-line react-hooks/exhaustive-deps
+
     return (
-        <div style={{justifySelf:"end"}}>
+        <Wrapper>
              <MenuBurger bgColor={theme.colors.bgColor} onClick={() => setShow(!show)}>
                  {
                      springs.map((props, i) => <animated.span key={i} style={props} />)
@@ -156,16 +199,16 @@ const Navigation = () => {
                                 <ul>
                                     {
                                         menuData.map(({main, sub}, i) => {
-                                            return <MainMenu theme={theme} main={main} sub={sub} key={i} />
+                                            return <MainMenu mediaQuer={mediaQuer} theme={theme} main={main} sub={sub} key={i} />
                                         })
                                     }
                                 </ul>
                             </div>
-                            <LoginSignUp theme={theme} />
+                            <LoginSignUp theme={theme} mediaQuer={mediaQuer} />
                         </MenuWrap>
                     )
             }
-        </div>
+        </Wrapper>
     )
 }
 

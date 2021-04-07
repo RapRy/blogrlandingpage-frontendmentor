@@ -6,6 +6,7 @@ import bgPatternCircles from '../../images/bg-pattern-circles.svg'
 
 const InfrasWrap = styled.div`
     position:relative;
+    text-align:center;
 
     &:after{
         z-index:1;

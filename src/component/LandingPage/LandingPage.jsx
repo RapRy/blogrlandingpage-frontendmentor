@@ -38,7 +38,8 @@ const LandingPage = () => {
         },
         colors:{
             lightRed:"hsl(356, 100%, 66%)",
-            white:"hsl(0, 0%, 100%)"
+            white:"hsl(0, 0%, 100%)",
+            veryLightRed:"hsl(355, 100%, 74%)"
         }
     }
 
@@ -48,6 +49,8 @@ const LandingPage = () => {
             borderStyle:"none", 
             bgStyle:theme.colors.white, 
             colorStyle:theme.colors.lightRed, 
+            colorHover:theme.colors.veryLightRed,
+            colorHoverText:theme.colors.white,
             marginStyle:"0 10px 0 0", 
             fontStyle:theme.ubuntu.family, 
             width:"160px", 
@@ -59,6 +62,8 @@ const LandingPage = () => {
             borderStyle:`1px solid ${theme.colors.white}`, 
             bgStyle:"transparent", 
             colorStyle:theme.colors.white, 
+            colorHover:theme.colors.white,
+            colorHoverText:theme.colors.lightRed,
             marginStyle:"0", 
             fontStyle:theme.ubuntu.family,  
             width:"160px", 

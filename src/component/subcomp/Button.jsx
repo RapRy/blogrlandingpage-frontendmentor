@@ -15,16 +15,30 @@ const ButtonLink = styled.a`
     margin:${({marginStyle}) => marginStyle};
     cursor:pointer;
     text-align:center;
+    transition:all 300ms;
+
+    &:focus,
+    &:hover{
+        background:${({colorHover}) => colorHover};
+        color:${({colorHoverText}) => colorHoverText};
+    }
+
+    &:active{
+        background:${({colorHover}) => colorHover};
+        color:${({colorHoverText}) => colorHoverText};
+    }
 `
 
 const Button = ({data}) => {
-    const { text, bgStyle, borderStyle, colorStyle, fontStyle, marginStyle, width, display, fontWeight } = data
+    const { text, bgStyle, borderStyle, colorStyle, fontStyle, marginStyle, width, display, fontWeight, colorHover, colorHoverText } = data
 
     return (
         <ButtonLink href="#"
             bgStyle={bgStyle}
             borderStyle={borderStyle}
             colorStyle={colorStyle}
+            colorHover={colorHover}
+            colorHoverText={colorHoverText}
             fontFamily={fontStyle}
             marginStyle={marginStyle}
             width={width}

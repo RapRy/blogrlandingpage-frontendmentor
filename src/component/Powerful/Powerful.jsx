@@ -8,6 +8,7 @@ import { Article } from '../subcomp'
 const PowerfulWrap = styled.div`
     margin:120px 0 100px;
     padding:0 20px;
+    text-align:center;
 `
 
 const Powerful = () => {

@@ -48,8 +48,12 @@ const Container = styled.section`
     z-index:3;
     display:grid;
     grid-template-columns:auto 1fr;
-    grid-gap:20px;
+    gap:20px;
     align-items:center;
+
+    @media all and (min-width:820px){
+        gap:30px;
+    }
 `
 
 const Header = () => {
