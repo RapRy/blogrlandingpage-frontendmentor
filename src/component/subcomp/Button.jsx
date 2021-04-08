@@ -27,9 +27,14 @@ const ButtonLink = styled.a`
         background:${({colorHover}) => colorHover};
         color:${({colorHoverText}) => colorHoverText};
     }
+
+    @media all and (min-width:850px){
+        background:${({btnId, bgStyle}) => btnId === 1 ? "#fff" : bgStyle};
+        color:${({btnId, colorStyle}) => btnId === 1 ? "hsl(356, 100%, 66%)" : colorStyle};
+    }
 `
 
-const Button = ({data}) => {
+const Button = ({data, btnId}) => {
     const { text, bgStyle, borderStyle, colorStyle, fontStyle, marginStyle, width, display, fontWeight, colorHover, colorHoverText } = data
 
     return (
@@ -44,6 +49,7 @@ const Button = ({data}) => {
             width={width}
             display={display}
             fontWeight={fontWeight}
+            btnId={btnId}
         >
             {text}
         </ButtonLink>

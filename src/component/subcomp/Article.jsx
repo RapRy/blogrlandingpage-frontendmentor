@@ -15,6 +15,12 @@ const ArtWrapper = styled.div`
         font-weight:${({font}) => font.weight[1]};
         margin-bottom:20px;
         text-align:center;
+
+        @media all and (min-width:968px){
+            font-size:1.3rem;
+            text-align:left;
+            margin-bottom:15px;
+        }
     }
 
     p{
@@ -24,6 +30,10 @@ const ArtWrapper = styled.div`
         font-weight:${({font}) => font.weight[0]};
         color:${({color}) => color.veryDarkGrayBlue};
         text-align:center;
+
+        @media all and (min-width:968px){
+            text-align:left;
+        }
     }
 `
 

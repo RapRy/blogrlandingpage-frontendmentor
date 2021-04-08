@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import illustrationEditorMobile from '../../images/illustration-editor-mobile.svg'
+import illustrationEditorDesktop from '../../images/illustration-editor-desktop.svg'
 
 import { Article } from '../subcomp'
 
 
 const IntroWrapper = styled.div`
-    margin:100px 0;
+    margin:100px auto;
+    max-width:1440px;
     padding:0 20px;
+    position:relative;
+
+    @media all and (min-width:968px){
+        margin:150px auto;
+    }
 
     h1{
         text-align:center;
@@ -23,8 +30,37 @@ const SecondaryWrapper = styled.div`
     margin-top:40px;
     text-align:center;
 
+    @media all and (min-width:968px){
+        display:grid;
+        grid-template-columns:repeat(2, 1fr);
+        gap:40px;
+        margin-top:60px;
+
+        img{
+            grid-column:2 / 3;
+            position:absolute;
+            top:-100px;
+            right:-210px;
+            max-width:70%;
+        }
+
+        div{
+            grid-coumn:1 / 2;
+            grid-row:1;
+            margin-left:30px;
+        }
+    }
+
     img{
         margin-bottom:40px;
+
+        @media all and (min-width:1220px){
+            max-width:62%;
+        }
+
+        @media all and (min-width:1370px){
+            max-width:55%;
+        }
     }
 `
 
@@ -59,12 +95,28 @@ const Introduction = () => {
         }
     }
 
+    const [mediaQuer, setMediaQuer] = useState(0)
+
+    useEffect(() => {
+        if(window.matchMedia('(min-width:968px)').matches){
+            setMediaQuer(968)
+        }
+
+        window.addEventListener('resize', () => {
+            if(window.matchMedia('(min-width:968px)').matches){
+                setMediaQuer(968)
+            }else{
+                setMediaQuer(0)
+            }
+        })
+    }, [mediaQuer])
+
     return (
         <div>
             <IntroWrapper font={theme.overpass} color={theme.colors}>
                 <h1>Designed for the future</h1>
                 <SecondaryWrapper>
-                    <img src={illustrationEditorMobile} alt="illustration"/>
+                    <img src={mediaQuer === 0 ? illustrationEditorMobile : illustrationEditorDesktop} alt="illustration"/>
                     <div>
                         {
                             articles.map(({heading, description}, i) => <Article key={i} heading={heading} description={description} />)

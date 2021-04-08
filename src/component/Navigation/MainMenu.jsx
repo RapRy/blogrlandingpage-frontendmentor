@@ -11,6 +11,13 @@ const Wrap = styled(animated.ul)`
     padding:20px;
     background:#f1f1f1;
     border-radius:5px;
+
+    @media all and (min-width:850px){
+        top:40px;
+        left:-20px;
+        padding:30px 40px 20px 20px;
+        box-shadow:${({boxShadow}) => boxShadow}
+    }
 `
 
 const SubLinkButton = styled.button`
@@ -18,6 +25,16 @@ const SubLinkButton = styled.button`
     font-family:${({overpass}) => overpass.family};
     font-weight:${({overpass}) => overpass.weight[1]};
     color:${({color}) => color.veryDarkDesaturatedBlue};
+    cursor:pointer;
+
+    @media all and (min-width:850px){
+        margin-bottom:10px;
+        font-size:.95rem;
+
+        &:hover{
+            color:#000;
+        }
+    }
 `
 
 const LinkButton = styled.button`
@@ -26,6 +43,10 @@ const LinkButton = styled.button`
     cursor:pointer;
 
     &:last-child{margin-bottom:0;}
+
+    @media all and (min-width:850px){
+        margin-bottom:0px;
+    }
 
     span{
         font-size:1.2rem;
@@ -36,6 +57,10 @@ const LinkButton = styled.button`
 
         @media all and (min-width:850px){
             font-size:1rem;
+
+            &:hover{
+                border-bottom:2px solid ${({color}) => color.white};
+            }
         }
     }
 
@@ -48,13 +73,14 @@ const LinkButton = styled.button`
 const LinkLi = styled.li`
     margin-bottom:20px;
     text-align:center;
+    position:relative;
 
     &:last-child{margin-bottom:0;}
 
     @media all and (min-width:850px){
-        ${({isInlineBlock}) => isInlineBlock && "display:inline-block; margin-right:30px;"}
+        text-align:left;
         margin-bottom:0px;
-
+        ${({isInlineBlock}) => isInlineBlock && "display:inline-block; margin-right:30px;"}
         ${({isInlineBlock}) => isInlineBlock && "&:last-child{margin-right:0;"}
 `
 
@@ -86,11 +112,11 @@ const MainMenu = ({theme, sub, main, mediaQuer}) => {
                 {
                     trans((style, item) => 
                     item &&
-                        <Wrap style={{
+                        <Wrap boxShadow={theme.boxShadow} style={{
                             transform:to([style.x], v => `scaleY(${v})`),
                             transformOrigin: "top",
                             overflow: "hidden",
-                            position: "relative"
+                            position: mediaQuer === 0 ? "relative" : "absolute"
                         }}>
                             <animated.div style={{
                                             transformOrigin:"top",

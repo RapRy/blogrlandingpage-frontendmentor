@@ -15,6 +15,10 @@ const Wrapper = styled.div`
         font-size:2.6rem;
         color:${({textColor}) => textColor.white};
         margin-bottom:30px;
+
+        @media all and (min-width:968px){
+            font-size:3.2rem;
+        }
     }
 
     p{
@@ -23,6 +27,10 @@ const Wrapper = styled.div`
         font-size:1.3rem;
         color:${({textColor}) => textColor.white};
         margin-bottom:50px;
+
+        @media all and (min-width:968px){
+            font-size:1.4rem;
+        }
     }
 `
 

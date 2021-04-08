@@ -50,7 +50,7 @@ const LoginSignUp = ({theme, mediaQuer}) => {
 
     return (
         <Wrap ubuntu={theme.ubuntu} color={theme.colors}>
-            {btnData.map((data, i) => <Button key={i} data={data} />)}
+            {btnData.map((data, i) => <Button key={i} data={data} btnId={i} />)}
         </Wrap>
     )
 }

@@ -50,6 +50,8 @@ const Container = styled.section`
     grid-template-columns:auto 1fr;
     gap:20px;
     align-items:center;
+    max-width:1440px;
+    margin:0 auto;
 
     @media all and (min-width:820px){
         gap:30px;
