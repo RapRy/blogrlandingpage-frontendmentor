@@ -11,10 +11,34 @@ const FooterWrap = styled.div`
 const FooterContainer = styled.div`
     padding:60px 20px 10px;
     text-align:center;
+    max-width:1440px;
+    margin:0 auto;
+
+    @media all and (min-width:810px){
+        display:grid;
+        grid-template-columns:auto 1fr;
+        gap:60px;
+        text-align:left;
+    }
+
+    @media all and (min-width:1050px){
+        gap:200px;
+    }
+
+    @media all and (min-width:1255px){
+        gap:300px;
+    }
 `
 
 const FooterMenu = styled.div`
     margin-top:50px;
+
+    @media all and (min-width:810px){
+        display:grid;
+        grid-template-columns:repeat(3, 1fr);
+        gap:30px;
+        margin-top:10px;
+    }
 `
 
 const Main = styled.div`
@@ -23,6 +47,10 @@ const Main = styled.div`
     font-weight:${({font}) => font.weight[1]};
     color:${({color}) => color};
     margin-bottom:30px;
+
+    @media all and (min-width:1050px){
+        font-size:1.1rem;
+    }
 `
 
 const Sub = styled.ul`
@@ -34,6 +62,15 @@ const Sub = styled.ul`
         font-weight:${({font}) => font.weight[0]};
         color:${({color}) => color};
         margin-bottom:20px;
+        cursor:pointer;
+
+        @media all and (min-width:1050px){
+            font-size:1rem;
+        }
+
+        &:hover{
+            text-decoration:underline;
+        }
 
         &:last-child{
             margin-bottom:0;

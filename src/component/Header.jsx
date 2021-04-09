@@ -40,6 +40,18 @@ const PatternBg = styled.section`
             bottom:50%;
             right:10%;
         }
+
+        @media all and (min-width:1192px){
+            max-width:150%;
+            bottom:90%;
+            right:10%;
+        }
+
+        @media all and (min-width:1440px){
+            max-width:150%;
+            bottom:120%;
+            right:10%;
+        }
     }
 `
 
