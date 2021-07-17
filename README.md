@@ -1,3 +1,5 @@
+![](https://i.ibb.co/BNJRqcL/blogrlandingpage.jpg)
+
 <h1>Blogr Landing Page</h1>
 This is my solution to the <a href="https://www.frontendmentor.io/challenges/blogr-landing-page-EX2RLAApP">:computer_mouse: Blogr Landing Page</a> from <a href="https://www.frontendmentor.io/">:computer_mouse: Frontend Mentor</a> 
 <br>
